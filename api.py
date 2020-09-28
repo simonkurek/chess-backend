@@ -1,6 +1,6 @@
 #imports
 from websocket_server import WebsocketServer
-from flask import Flask, request
+from flask import Flask, request, json
 import manager
 
 #flask init
@@ -27,6 +27,12 @@ def getGame():
     id = request.args.get("id")
     return manager.getGame(id)
 
+@app.route('/joinGame')
+def joinGame():
+    gameID = request.args.get('gameid')
+    userID = request.args.get('userid')
+    return manager.joinGame(gameID, userID)
+
 ###########################
 # --- websockets events --- 
 
@@ -40,6 +46,8 @@ def client_left(client, server):
 
 #client send message
 def message_received(client, server, message):
+    response_json = json.loads(message)
+    print(response_json['mess'])
     server.send_message_to_all(message)
 
 #############################

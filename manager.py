@@ -14,3 +14,6 @@ def getGame(id):
     for i in gameList:
         if id == i.uuid:
             return i
+
+def joinGame(gameID, userID):
+    return getGame(gameID).join(userID)

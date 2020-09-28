@@ -16,4 +16,7 @@ class Game:
         ]
 
     def join(self, uuid):
-        self.players.append(uuid)
+        if len(self.players) == 1:
+            self.players.append(uuid)
+            return 'success'
+        else: return 'fail'
