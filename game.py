@@ -2,8 +2,9 @@ import uuid
 
 class Game:
     def __init__(self):
-        self.uuid = uuid.uuid1()
+        self.uuid = str(uuid.uuid1())
         self.players = []
+        self.sessions = []
         self.table = [
             [2, 3, 4, 5, 6, 4, 3, 2],
             [1, 1, 1, 1, 1, 1, 1, 1],
@@ -16,7 +17,7 @@ class Game:
         ]
 
     def join(self, uuid):
-        if len(self.players) == 1:
+        if len(self.players)<2:
             self.players.append(uuid)
             return 'success'
         else: return 'fail'

@@ -47,8 +47,24 @@ def client_left(client, server):
 #client send message
 def message_received(client, server, message):
     response_json = json.loads(message)
-    print(response_json['mess'])
-    server.send_message_to_all(message)
+    mess = response_json['mess']
+    gameid = response_json['gameid']
+    userid = response_json['userid']
+    if gameid == 'undefined':
+        return server.send_message(client, 'nogameid')
+    game = manager.getGame(gameid)
+    if userid not in game.players:
+        return server.send_message(client, 'http403')
+    if client not in game.sessions:
+        game.sessions.append(client)
+    if len(game.sessions)<2:
+        return server.send_message(client, 'single')
+    #somefunc(mess)
+    i = 0
+    for player in game.players:
+        if player is not userid:
+            return server.send_message(game.sessions[i], mess)
+        i += 1
 
 #############################
 # --- websocket config ---

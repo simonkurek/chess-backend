@@ -5,7 +5,7 @@ gameList = []
 def createGame():
     newGame = game.Game()
     gameList.append(newGame)
-    return newGame.uuid
+    return str(newGame.uuid)
 
 def getAll():
     return gameList
