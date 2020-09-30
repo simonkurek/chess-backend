@@ -33,11 +33,12 @@ const connection = () => {
     }
 }
 
-const sendMess = (mess) => {
+const sendMess = (mess, move) => {
     const json = `{
         "userid":"${my_uuid}",
         "gameid":"${game_id}",
-        "mess":"${mess}"
+        "mess":"${mess}",
+        "move": [[0,4],[0,4]]
     }`
     ws.send(json)
 }
@@ -81,6 +82,7 @@ const joinGame = () => {
 window.onload = () => {
     my_uuid = getID()
     cls()
+    connection()
 }
 
 // on start page:

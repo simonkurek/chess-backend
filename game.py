@@ -18,7 +18,15 @@ class Game:
         ]
 
     def join(self, uuid):
-        if len(self.players)<2:
+        playersSize = len(self.players)
+        if playersSize<2:
             self.players.append(uuid)
             return json.dumps({'status':'success'})
-        else: return json.dumps({'status':'failure'})
+        return json.dumps({'status':'failure'})
+
+    def checkSiteCorrect(self, userid, move):
+        print(userid)
+        print(move)
+        #fromx = move['from'][0]
+        #fromy = move['from'][1]
+        #print(self.table[fromx][fromy])

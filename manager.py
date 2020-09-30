@@ -18,3 +18,10 @@ def getGame(id):
 
 def joinGame(gameID, userID):
     return getGame(gameID).join(userID)
+
+#{
+#    'from':{1,4},
+#    'to':{2,3}
+#}
+
+#{'from':{1,4},'to':{2,3}}

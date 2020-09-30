@@ -61,6 +61,7 @@ def message_received(client, server, message):
     mess = response_json['mess']
     gameid = response_json['gameid']
     userid = response_json['userid']
+    move = response_json['move']
 
     #check game id
     if gameid == 'undefined':
@@ -78,10 +79,12 @@ def message_received(client, server, message):
     if len(manager.getGame(gameid).sessions)<2:
         return server.send_message(client, 'single')
 
+    manager.getGame(gameid).checkSiteCorrect(userid, move)
+
     #send mess to all players in game session
     for player in manager.getGame(gameid).sessions:
         act_client = server.handler_to_client(player)
-        server.send_message(act_client, mess)
+        server.send_message(act_client, move)
 
 #############################
 # --- websocket config ---
