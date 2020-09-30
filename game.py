@@ -1,4 +1,5 @@
 import uuid
+import json
 
 class Game:
     def __init__(self):
@@ -19,5 +20,5 @@ class Game:
     def join(self, uuid):
         if len(self.players)<2:
             self.players.append(uuid)
-            return 'success'
-        else: return 'fail'
+            return json.dumps({'status':'success'})
+        else: return json.dumps({'status':'failure'})

@@ -1,9 +1,16 @@
+//server config
+const PROTOCOL = 'http'
+const IP = 'localhost'
+const PORT = 5000
+const SRV = PROTOCOL + '://' + IP + ':' + PORT
+
+//client variables
 let my_uuid
 let game_id
 
 const connection = () => {
     //create websocket connection
-    ws = new WebSocket('ws://localhost:9001') 
+    ws = new WebSocket('ws://' + IP + ':9001') 
 
     //on message event
     ws.onmessage = (event) => { 
@@ -53,6 +60,24 @@ const getID = () => {
     return uuid
 }
 
+const createGame = () => {
+    fetch(SRV + '/createGame')
+    .then(resp => resp.json())
+    .then(resp => {
+        game_id = resp.uuid
+        console.log(resp)
+        joinGame()
+    })
+}
+
+const joinGame = () => {
+    fetch(SRV + '/joinGame?gameid=' + game_id + '&userid=' + my_uuid)
+    .then(resp => resp.json())
+    .then(resp => {
+        if(resp.status != 'success') console.error('join game failure')
+    })
+}
+
 window.onload = () => {
     my_uuid = getID()
     cls()
@@ -61,5 +86,5 @@ window.onload = () => {
 // on start page:
 // 1. create connection by "connection()" in console
 // 2. create game by /createGame
-// 3. second player /joingame?gameid=jd
+// 3. second player /joingame?gameid=jd&userid=jd
 // 4. go "sendMess('jd')" to send mess jd with your id and gameid to server

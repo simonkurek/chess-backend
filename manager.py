@@ -1,3 +1,4 @@
+import json
 import game
 
 gameList = []
@@ -5,7 +6,7 @@ gameList = []
 def createGame():
     newGame = game.Game()
     gameList.append(newGame)
-    return str(newGame.uuid)
+    return json.dumps({'uuid':str(newGame.uuid)})
 
 def getAll():
     return gameList

@@ -1,32 +1,39 @@
 #imports
 from websocket_server import WebsocketServer
 from flask import Flask, request, json
+from flask_cors import CORS, cross_origin
 import manager
 
 #flask init
 app = Flask(__name__)
+cors = CORS(app, resources={"*": {"origins": "*"}})
 
 ############################
 # --- flask routes ---
 
 #run websocket module
+@cross_origin
 @app.route('/runApp')
 def run():
     server.run_forever()
 
+@cross_origin
 @app.route('/createGame')
 def createGame():
     return manager.createGame()
 
+@cross_origin
 @app.route('/getAll')
 def getAll():
     return manager.getAll()
 
+@cross_origin
 @app.route('/getGame')
 def getGame():
     id = request.args.get("id")
     return manager.getGame(id)
 
+@cross_origin
 @app.route('/joinGame')
 def joinGame():
     gameID = request.args.get('gameid')
