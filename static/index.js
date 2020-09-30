@@ -6,8 +6,7 @@ const connection = () => {
     ws = new WebSocket('ws://localhost:9001') 
 
     //on message event
-    ws.onmessage = (event) => {
-        console.log('message received') 
+    ws.onmessage = (event) => { 
         console.log(event.data)
     } 
 
