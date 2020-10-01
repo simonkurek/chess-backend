@@ -38,7 +38,7 @@ const sendMess = (mess, move) => {
         "userid":"${my_uuid}",
         "gameid":"${game_id}",
         "mess":"${mess}",
-        "move": [[0,4],[0,4]]
+        "move":"[4,0][4,0]"
     }`
     ws.send(json)
 }

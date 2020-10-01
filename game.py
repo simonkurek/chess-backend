@@ -25,8 +25,8 @@ class Game:
         return json.dumps({'status':'failure'})
 
     def checkSiteCorrect(self, userid, move):
-        print(userid)
-        print(move)
-        #fromx = move['from'][0]
-        #fromy = move['from'][1]
-        #print(self.table[fromx][fromy])
+        fx = int(move[3])
+        fy = int(move[1])
+        tx = int(move[8])
+        ty = int(move[6])
+        print(self.table[fx][fy])
