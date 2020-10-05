@@ -83,8 +83,9 @@ def message_received(client, server, message):
 
     #send mess to all players in game session
     for player in manager.getGame(gameid).sessions:
-        act_client = server.handler_to_client(player)
-        server.send_message(act_client, move)
+        if player != client['handler']:
+            act_client = server.handler_to_client(player)
+            server.send_message(act_client, move)
 
 #############################
 # --- websocket config ---
