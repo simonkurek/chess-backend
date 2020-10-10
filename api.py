@@ -81,6 +81,8 @@ def message_received(client, server, message):
 
     manager.getGame(gameid).checkSiteCorrect(userid, move)
 
+    print(manager.getGame(gameid).table)
+
     #send mess to all players in game session
     for player in manager.getGame(gameid).sessions:
         if player != client['handler']:
